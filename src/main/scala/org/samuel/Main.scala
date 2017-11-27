@@ -14,7 +14,7 @@ class Cell (var x:Int, var y:Int, var confirm:Int = 0) {
 
   private[this] def checkConfirm: Unit = {
     if (predict.size == 1) {
-      confirm = predict.toList(0)
+      confirm = predict.iterator.next
     }
   }
 
