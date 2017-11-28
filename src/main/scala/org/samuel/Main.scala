@@ -47,12 +47,25 @@ class Cell (var x:Int, var y:Int, var confirm:Int = 0) {
   }
 }
 
+object print_matrix(matrix: Array[Array[Cell]]):Unit = {
+  (0 to 8).foreach{ x=>
+    println("x: " + x)
+  }
+}
+
 object Main extends App {
+  if (args.length == 0) {
+    println("please enter numbers 9x9, 81 numbers")
+    System.exit(1)
+  }
+
+  val number_string = args.toList.map(_.toInt)
   val matrix = Array.ofDim[Cell](9, 9)
 
-  //init
-  for (i <- 0 to 8) {
-    (0 to 8).foreach{ y => matrix(i)(y) = new Cell(i,y) }
+  number_string.grouped(9).toList.zipWithIndex.foreach{ case(x, xi) =>
+      x.zipWithIndex.foreach { case (y, yi) =>
+          matrix(xi)(yi) = new Cell(xi, yi)
+      }
   }
 
   //display
